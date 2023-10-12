@@ -1,0 +1,93 @@
+{% extends "adminpages/admin_header_footer.html" %}
+{% load static %}
+{% block content %}
+        <div class="breadcrumbs">
+            <div class="breadcrumbs-inner">
+                <div class="row m-0">
+                    <div class="col-sm-4">
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <h1>Country Details</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="page-header float-right">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li><a href="{% url 'admmin_home' %}">Admin</a></li>
+                                    <li><a href="{% url 'admmin_home' %}">Dashboard</a></li>
+                                    <li class="active">Country Data</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="content">
+            <a href="{% url 'AddCountry' %}" class="btn btn-primary btn-sm">Add Country</a>
+            <div class="animated fadeIn">
+                <div class="row">
+
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">Country Data Table</strong>
+                            </div>
+
+                            <div class="card-body">
+
+
+
+                                <table id="bootstrap-data-table" class="table table-responsive-md table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+<!--                                            <th>service pic </th>-->
+                                            <th>Name </th>
+
+
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for records in Country_record %}
+                                        <tr>
+                                            
+                                            <td>{{records.name}}</td>
+
+
+                                            <td>
+                                                <a href="{% url 'DeleteCountry' id=records.id %}" class="btn btn-danger btn-sm">Delete</a>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#bootstrap-data-table').DataTable({
+            // Add options here
+        });
+    });
+</script>
+
+{% endblock %}

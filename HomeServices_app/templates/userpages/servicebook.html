@@ -1,0 +1,99 @@
+{% extends "userpages/user_header_footer.html" %}
+{% block content %}
+{% load static %}
+<diV class="container-xxl py-2" style="max-width:1650px">
+<div class="container-fluid service-page-header py-5 mb-5">
+    <div class="container py-5">
+        <h1 class="display-3 text-white mb-3 animated slideInDown">Service</h1>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a class="text-white" href="{% url 'index' %}">Home</a></li>
+                <!-- <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li> -->
+                <li class="breadcrumb-item text-white active" aria-current="page">Book a Service</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+</diV>
+
+<div class="container-fluid bg-light overflow-hidden my-5 px-lg-0" style="max-width:1650px">
+    <div class="container quote px-lg-0">
+        <div class="row g-0 mx-lg-0">
+            <div class="col-lg-6 ps-lg-0" style="min-height: 400px;">
+                <div class="position-relative h-100">
+                    <img class="position-absolute img-fluid w-100 h-100" src="{% static 'user_assets/img/quote.jpg' %}" style="object-fit: cover;" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6 quote-text py-5 wow fadeIn" data-wow-delay="0.5s">
+                <div class="p-lg-5 pe-lg-0">
+                    <div class="section-title text-start">
+                        <h1 class="display-5 mb-4">Book an Apointment</h1>
+                    </div>
+                    <!-- <p class="mb-4 pb-2">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo erat amet</p> -->
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            <div class="col-12 col">
+                                <label><b>Problem Description : </b></label>
+                                <!-- <input type="text" class="form-control border-0" name="Problem_Description" placeholder="Your Problem Description" style="height: 55px;"> -->
+                                <textarea class="form-control border-0" name="Problem_Description"  placeholder=" Your Problem Description"></textarea>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <label><b>House_No : </b></label>
+                                <input type="text" class="form-control border-0"name="House_No"  placeholder="Your House_No" style="height: 55px;">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <label><b>Address : </b></label>
+                                <input type="text" class="form-control border-0" name="Address" placeholder="Your Address" style="height: 55px;">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <label><b>Contact Number : </b></label>
+                                <input type="text" class="form-control border-0" name="contact" placeholder="Your Mobile" style="height: 55px;">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <label>Service Catogory: </b></label>
+                                <input type="text" class="form-control border-0" name="service_name"  style="height: 55px;" value="{{services.Name}}" readonly>
+                                <input type="hidden" class="form-control border-0" name="service"  style="height: 55px;" value="{{services.id}}" readonly>
+                            </div>
+                            <!-- <div class="col-12 col-sm-6">
+                                <select class="form-select border-0" style="height: 55px;" name="Service">
+                                    <option selected>Select A Service</option>
+                                    
+                                    <option value="{{service.id}}">{{service.name}}</option>
+                                    
+                                    <option value="2">Service 2</option>
+                                    <option value="3">Service 3</option>
+                                </select>
+                            </div> -->
+
+                            <div class="col-12 col-sm-6">
+                                <label><b>City : </b></label>
+                                <select class="form-select border-0" style="height: 55px;"name="city" >
+                                    <option selected>Select A city</option>
+                                    {% for c in city %}
+                                    <option value="{{c.id}}">{{c.name}}</option>
+                                    {% endfor %}
+                                    
+                                </select>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <label><b>Pincode : </b></label>
+                                <input type="text" class="form-control border-0"name="Pincode"  placeholder="Your Pincode" style="height: 55px;">
+                            </div>
+                            
+                            <div class="col-12">
+                                <label><b>landmark : </b></label>
+                                <textarea class="form-control border-0" name="landmark"  placeholder=" enter your landmark"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

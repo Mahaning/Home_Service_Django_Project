@@ -1,0 +1,17 @@
+     {% for service in Services %}
+        <div class="item">
+            <div class="service-bg">
+                <img src="{{ service.img.url }}" alt="{{ service.Name }}" />
+            </div>
+            <div class="service-img">
+                <img src="{% static 'path/to/your/default/image.png' %}" alt="{{ service.Name }}" />
+            </div>
+            <div class="service-des">
+                <a href="services-detailc87c.html?id={{ service.id }}"><h4>{{ service.Name }}</h4></a>
+                <p>{{ service.Description }}</p>
+            </div>
+            <div class="btn-main">
+                <a href="services-detailc87c.html?id={{ service.id }}">Know More <span><i class="fas fa-plus"></i></span></a>
+            </div>
+        </div>
+        {% endfor %}

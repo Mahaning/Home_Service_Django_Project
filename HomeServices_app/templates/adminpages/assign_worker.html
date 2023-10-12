@@ -1,0 +1,130 @@
+{% extends "adminpages/admin_header_footer.html" %}
+{% load static %}
+{% block content %}
+    <style>
+
+
+        .container {
+            height:100%;
+            margin: auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #4285f4;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        label {
+            color: #555555;
+            font-weight: bold;
+        }
+
+        .form-control {
+            border-color: #cccccc;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label,
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #4285f4;
+            box-shadow: 0 0 0 0.2rem rgba(66, 133, 244, 0.25);
+        }
+
+        .btn-primary {
+            background-color: #4285f4;
+            border-color: #4285f4;
+        }
+
+        .btn-primary:hover {
+            background-color: #357ae8;
+            border-color: #357ae8;
+        }
+    </style>
+
+    <div class="container mt-5">
+        <h1>User Registration Form</h1>
+        {{msg}}
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="firstname">Requested Service :</label>
+                    <input type="text" class="form-control" id="service_name" name="service_name" value="{{req.service.Name}}" required>
+                    <input type="hidden" class="form-control" id="service_id" name="service_id" value="{{req.service.id}}" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="lastname">User :</label>
+                    <input type="text" class="form-control" id="user" name="username" value="{{req.user.admin.first_name}}" required>
+                    <input type="hidden" class="form-control" id="user" name="user" value="{{req.user.admin.id}}" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="Description">Problem Description ::</label>
+                <textarea class="form-control" id="Description" name="Description" rows="4" required> {{req.Problem_Description}}</textarea>
+            </div>
+
+            <div class="form-row">
+                <div class= "form-group col-md-6">
+                    <label>Assign a Worker</label>
+                    <select class="form-control " style="" name="assigned_worker" id="assigned_worker">
+                        <option selected>Select Worker</option>
+                        {% for records in workers_records %}
+                        <option value="{{records.id}}">{{records.admin.first_name}} ({{records.id}})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="lastname">Contact :</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" value="{{req.contact}}" required>
+                </div>
+            </div>
+
+            
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="firstname">House_No :</label>
+                    <input type="text" class="form-control" id="service_name" name="service_name" value="{{req.House_No}}" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="lastname">Adress :</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" value="{{req.Address}}" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="firstname">Pincode :</label>
+                    <input type="text" class="form-control" id="service_name" name="service_name" value="{{req.pin}}" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="lastname">City :</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" value="{{req.city.name}}" required>
+                </div>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+
+    <!-- Add Bootstrap JS and jQuery (required for Bootstrap JS) -->
+
+{% endblock %}
+

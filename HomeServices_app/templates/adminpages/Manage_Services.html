@@ -1,0 +1,94 @@
+{% extends "adminpages/admin_header_footer.html" %}
+{% load static %}
+{% block content %}
+        <div class="breadcrumbs">
+            <div class="breadcrumbs-inner">
+                <div class="row m-0">
+                    <div class="col-sm-4">
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <h1>Manage Services</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="page-header float-right">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li><a href="{% url 'admmin_home' %}">Admin</a></li>
+                                    <li><a href="{% url 'admmin_home' %}">Dashboard</a></li>
+                                    <li class="active">Service Data</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="animated fadeIn">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">Services Table</strong>
+                            </div>
+                            <div class="card-body">
+                                <div>
+                                <a href="{% url 'AddServices' %}" class="btn btn-primary btn-sm">Add Service</a><br>
+                                </div>
+
+                                <table id="bootstrap-data-table" class="table table-responsive-md table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>service pic </th>
+                                            <th>Name </th>
+
+                                            <th>Description</th>
+
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for records in services %}
+                                        <tr>
+                                            <td><img class="img-fluid" src="{{ records.img.url }}" alt="{{ records.Name }}"></td>
+
+
+                                            <td>{{records.Name}}</td>
+                                            <td>{{records.Description}}</td>
+
+                                            <td>
+                                                <a href="{% url 'EditServices' id=records.id %}" class="btn btn-primary btn-sm">Edit</a>
+                                               
+                                                <a href="{% url 'DeleteServices' id=records.id %}" class="btn btn-sm btn-danger" id="delete">Delete</a>
+                                            </td>
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#bootstrap-data-table').DataTable({
+            // Add options here
+        });
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+
+
+
+{% extends "userpages/user_header_footer.html" %}
+{% block content %}
+{% load static %}
+<div class="container mt-5">
+    <h2>Appointment History</h2>
+<!-- Display request data in cards -->
+<h5>Request Data:</h5>
+{% for request_data in requests %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{ request_data.service.Name }} || </h5>
+        <p class="card-text"> Requested Date: {{ request_data.dateofrequest|date:"Y-m-d" }}</p>
+        <p class="card-text">User: {{ request_data.user.admin.first_name }}</p>
+        <p><a class="btn btn-sm btn-warning">Status: Action needed</a>                  <a class=" btn btn-sm btn-danger" href="{% url 'CancelRequest' request_data.id %}">Cancel</a></p> 
+        <!-- Add more fields as needed -->
+    </div>
+</div>
+{% endfor %}
+
+<!-- Display response data in cards -->
+<h5>Response Data:</h5>
+{% for response in responses %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{ response.requests.service.Name }} || Date: {{ response.requests.dateofrequest|date:"Y-m-d" }}</h5>
+        <h5>Requested Date: {{ response.Date|date:"Y-m-d" }} </h5>
+        <p class="card-text">Assigned To: {{ response.assigned_worker.admin.first_name }}</p>
+        <p class="card-text">User: {{ response.requests.user.admin.first_name }}</p>
+        <p class="card-text">Status:
+            {% if response.status == True %}
+            <span class="btn btn-sm btn-success">Completed</span>
+            {% else %}
+            <span class="btn btn-sm btn-warning">Pending</span>
+            {% endif %}
+            <!-- <a class="btn btn-sm btn-danger" href="">Cancel</a> -->
+        </p>
+
+        <!-- Add more fields as needed -->
+    </div>
+</div>
+{% endfor %}
+</div>
+{% endblock %} 

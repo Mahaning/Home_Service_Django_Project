@@ -1,0 +1,33 @@
+{% extends "userpages/user_header_footer.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container mt-5">
+    <h2>Provide Feedback</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+        <label for="employ">Select Employee:</label>
+            <select class="form-control" id="employ" name="employ" required>
+                <option value="" disabled selected>Select an Employee</option>
+                {% for worker in workers %}
+                    <option value="{{ worker.id }}">{{ worker.admin.first_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="rating">Rating:</label>
+            <input type="number" class="form-control" id="rating" name="rating" min="0" max="5" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Feedback</button>
+    </form>
+</div>
+
+<!-- Include Bootstrap JS -->
+{% endblock %}

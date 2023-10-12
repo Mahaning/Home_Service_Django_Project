@@ -1,0 +1,100 @@
+{% extends "adminpages/admin_header_footer.html" %}
+{% load static %}
+{% block content %}
+        <div class="breadcrumbs">
+            <div class="breadcrumbs-inner">
+                <div class="row m-0">
+                    <div class="col-sm-4">
+                        <div class="page-header float-left">
+                            <div class="page-title">
+                                <h1>View Asigned Works</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="page-header float-right">
+                            <div class="page-title">
+                                <ol class="breadcrumb text-right">
+                                    <li><a href="{% url 'admmin_home' %}">Admin</a></li>
+                                    <li><a href="{% url 'admmin_home' %}">Dashboard</a></li>
+                                    <li class="active">Task Data</li>
+<!--                                    <li class="active"></li>-->
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="animated fadeIn">
+                <div class="row">
+
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <strong class="card-title">Response List</strong>
+                            </div>
+                            <div class="card-body">
+
+                                <table id="bootstrap-data-table" class="table table-responsive-md table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>request </th>
+                                            <th>User </th>
+
+                                            <th>Assigned worker Name</th>
+                                            
+                                            <th>Date</th>
+
+                                            <!-- <th>Problem Description</th> -->
+                                            <th>status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for records in Response_records %}
+                                        <tr>
+<!--                                            <td>pics</td>-->
+
+
+                                            <td>{{records.requests.service.Name}}</td>
+                                            <td>{{records.requests.user.admin.first_name}}</td>
+                                            <td>{{records.assigned_worker.admin.first_name}}</td>
+                                            
+                                            <td>{{records.Date}}</td>
+                                            {% if records.status == True %}
+                                            <td class="text-primary">Completed</td>
+                                            {% else %}
+                                            <td class="text-warning">Pending</td>
+                                            {% endif %}
+
+                
+
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#bootstrap-data-table').DataTable({
+            // Add options here
+        });
+    });
+</script>
+
+{% endblock %}
